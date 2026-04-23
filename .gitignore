@@ -1,0 +1,11 @@
+# Bỏ qua thư mục chứa ảnh gốc siêu nặng
+data/asl_alphabet_train/
+
+# Bỏ qua các file rác của hệ thống
+__pycache__/
+*.pyc
+.vscode/
+
+# Bỏ qua môi trường ảo (nếu có)
+venv/
+.venv/
