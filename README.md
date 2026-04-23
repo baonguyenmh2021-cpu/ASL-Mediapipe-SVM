@@ -1,62 +1,56 @@
 <div align="center">
 
-# 🤟 ASL Recognition System
-### **Real-time Sign Language Translation with MediaPipe & SVM**
+# 🤟 ASL Recognition - Machine Learning Pipeline
+### **Real-time American Sign Language Translation using MediaPipe & SVM**
 
 [![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![MediaPipe](https://img.shields.io/badge/MediaPipe-v0.10-teal?style=for-the-badge&logo=google&logoColor=white)](https://mediapipe.dev/)
-[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.7-orange?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![MediaPipe](https://img.shields.io/badge/MediaPipe-v0.10-00C853?style=for-the-badge&logo=google&logoColor=white)](https://mediapipe.dev/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.7-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![Status](https://img.shields.io/badge/Status-Completed-success?style=for-the-badge)](https://github.com/baonguyenmh2021-cpu)
 
-*Một giải pháp Computer Vision gọn nhẹ, tối ưu hóa cho hiệu suất cao trên mọi thiết bị.*
+*Một giải pháp Computer Vision tối ưu, tốc độ cao, nhận diện ngôn ngữ ký hiệu ngay trên trình duyệt/webcam.*
 
 ---
-[ 🎬 Xem Demo ] | [ 📊 Kết quả ] | [ 🛠️ Cài đặt ] | [ 🤝 Liên hệ ]
+[ 📑 Tổng quan ] | [ 📁 Cấu trúc ] | [ 🚀 Cài đặt ] | [ 📊 Kết quả ] | [ 🤝 Tác giả ]
 </div>
 
-## 📖 Giới thiệu (Overview)
-Dự án tập trung vào việc thu hẹp khoảng cách giao tiếp bằng cách nhận diện các chữ cái trong Ngôn ngữ Ký hiệu Mỹ (ASL). 
+## 📖 1. Giới thiệu (Overview)
+Dự án tập trung vào việc xây dựng hệ thống nhận diện 26 chữ cái tiếng Anh trong Ngôn ngữ Ký hiệu Mỹ (ASL). 
 
-> **Tại sao lại dùng SVM thay vì Deep Learning?**
-> Thay vì "đốt" tài nguyên vào các mô hình CNN nặng nề, chúng tui sử dụng **Feature Engineering** để trích xuất 21 điểm khớp tay. Điều này giúp hệ thống đạt tốc độ xử lý gần như tức thời (Low Latency) ngay cả trên các thiết bị không có GPU.
+Thay vì sử dụng các mô hình Deep Learning (CNN) nặng nề, hệ thống được tối ưu hóa qua quy trình **Feature Engineering**:
+* **Trích xuất:** Sử dụng MediaPipe để lấy 21 tọa độ điểm khớp tay (x, y, z).
+* **Chuẩn hóa:** Thuật toán dịch tâm giúp nhận diện linh hoạt dù tay ở bất kỳ vị trí nào.
+* **Phân loại:** Mô hình SVM đạt độ chính xác ~99% trên tập Test và cực kỳ nhẹ trên CPU.
 
 
-## ✨ Tính năng nổi bật
-* **🎯 Độ chính xác cao:** Sử dụng SVM với tối ưu hóa siêu tham số (Grid Search).
-* **⚡ Tốc độ vượt trội:** Trích xuất đặc trưng bằng MediaPipe giúp giảm tải xử lý ảnh thô.
-* **⌨️ Bộ gõ thông minh:** * **Majority Voting:** Lọc nhiễu kết quả từ 10 frame liên tiếp.
-    * **Dwell Time:** Thanh tiến trình (Progress Bar) xác nhận gõ chữ khi giữ tay ổn định.
-    * **Chức năng:** Hỗ trợ phím ảo `Space` và `Delete`.
 
 ---
 
-## 📂 Cấu trúc Thư mục
-| Thư mục | Chức năng |
-| :--- | :--- |
-| `src/` | Chứa toàn bộ mã nguồn xử lý, huấn luyện và ứng dụng. |
-| `data/` | Lưu trữ dữ liệu thô (ảnh) và dữ liệu đã qua xử lý (CSV). |
-| `models/` | Nơi lưu trữ "bộ não" của hệ thống (`.pkl`). |
-| `results/` | Các biểu đồ đánh giá Confusion Matrix và Heatmap. |
+## ✨ 2. Tính năng nổi bật
+* **⚡ Real-time Processing:** Xử lý 30+ khung hình/giây trên CPU thường.
+* **🛡️ Noise Filtering:** Thuật toán **Majority Voting** (Hàng đợi 10 frames) giúp kết quả không bị nhảy chữ liên tục.
+* **⌛ Dwell Time Logic:** Thanh tiến trình (Progress Bar) trực quan giúp người dùng biết khi nào chữ cái được xác nhận.
+* **⌨️ Virtual Keyboard:** Hỗ trợ phím chức năng ảo như `Space` (khoảng cách) và `Delete` (xoá chữ).
 
 ---
 
-## 📊 Dữ liệu (Dataset)
-Do dung lượng bộ dữ liệu gốc lên đến **3GB**, chúng tui chỉ lưu trữ các đặc trưng đã trích xuất (`.csv`) trên Repository này.
-
-1.  **Nguồn:** [ASL Alphabet Dataset (Kaggle)](https://www.kaggle.com/datasets/grassknoted/asl-alphabet)
-2.  **Cấu trúc:** Giải nén 29 thư mục chữ cái (A-Z, Del, Nothing, Space) vào `data/raw/`.
-
----
-
-## 🚀 Hướng dẫn Sử dụng (Pipeline)
-
-### 1️⃣ Thiết lập môi trường
-```bash
-pip install -r requirements.txt
-2️⃣ Trích xuất & Huấn luyệnĐể xây dựng lại mô hình từ đầu, hãy chạy theo thứ tự:Bash# Bước 1: Quét ảnh và trích xuất tọa độ
-python src/collect_landmarks.py
-
-# Bước 2: Huấn luyện mô hình SVM
-python src/train_model.py
-3️⃣ Chạy ứng dụng Real-timeBashpython src/app.py
-📈 Kết quả thực nghiệmMetricGiá trịAccuracy (Test Set)~99%FPS (Webcam)30+Các biểu đồ chi tiết (Confusion Matrix) có thể tìm thấy trong thư mục /results.🤝 Tác giả (Authors)Đơn vị: Trường Đại học Sư phạm - Đại học Đà Nẵng (UED)
+## 📁 3. Cấu trúc Thư mục (Project Anatomy)
+```text
+asl-recognition/
+├── data/
+│   ├── raw/                # ⚠️ Dataset 3GB (Đã chặn bởi .gitignore)
+│   └── processed/          # File CSV tọa độ sau khi "ép mỡ"
+├── models/                 # Chứa Model SVM (.pkl) & Scaler
+├── results/                # Biểu đồ Confusion Matrix & Heatmap
+├── src/                    # Mã nguồn cốt lõi
+│   ├── collect_landmarks.py # [BƯỚC 1] Trích xuất ảnh -> CSV
+│   ├── train_model.py       # [BƯỚC 2] Huấn luyện & Tối ưu SVM
+│   ├── app.py               # [BƯỚC 3] Ứng dụng Real-time
+│   └── get_versions.py      # Công cụ kiểm tra môi trường
+├── requirements.txt        # Danh sách thư viện cài đặt
+└── README.md               # Tài liệu dự án
+🚀 4. Hướng dẫn Sử dụng (Pipeline)🔹 Bước 1: Chuẩn bị môi trườngCài đặt chính xác các phiên bản thư viện đã được kiểm nghiệm:Bashpip install -r requirements.txt
+🔹 Bước 2: Trích xuất đặc trưng (Feature Extraction)Script này sẽ quét qua hàng ngàn tấm ảnh để lấy tọa độ xương tay:Bashpython src/collect_landmarks.py
+🔹 Bước 3: Huấn luyện mô hình (Training)Tự động tìm kiếm bộ tham số tốt nhất (Grid Search) và lưu model:Bashpython src/train_model.py
+🔹 Bước 4: Chạy ứng dụng (Inference)Trải nghiệm hệ thống nhận diện thực tế qua Webcam:Bashpython src/app.py
+📈 5. Kết quả thực nghiệmDự án sử dụng Confusion Matrix để kiểm tra độ nhầm lẫn giữa các lớp.MetricGiá trịĐộ chính xác (Accuracy)> 99%Thời gian phản hồi< 10msDung lượng Model~2MB(Xem chi tiết biểu đồ trong thư mục /results)🤝 6. Thông tin Tác giảTrường Đại học Sư phạm - Đại học Đà Nẵng (UED) Dự án Nghiên cứu Khoa học Sinh viên - Khoa Công nghệ thông tin.
