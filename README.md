@@ -107,7 +107,7 @@ asl-recognition/
 ---
 
 ## 📊 Nguồn Dữ liệu (Dataset)
-Lưu ý: Bộ dữ liệu gốc (Raw Images) có dung lượng khoảng 3GB nên không được lưu trữ trực tiếp trên Repository này để đảm bảo hiệu suất.
+Lưu ý: Bộ dữ liệu gốc (Raw Images) có dung lượng khoảng 1GB nên không được lưu trữ trực tiếp trên Repository này để đảm bảo hiệu suất.
 
 Tải bộ dữ liệu ASL Alphabet Dataset từ Kaggle.
 Link: https://www.kaggle.com/datasets/grassknoted/asl-alphabet
