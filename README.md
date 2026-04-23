@@ -90,23 +90,29 @@ E --> F[Predicted Character]
 asl-recognition/
 │
 ├── data/
-│   ├── raw/               # Dataset gốc (~3GB)
 │   └── processed/         # CSV landmarks
 │
 ├── models/                # SVM model + scaler
-├── results/               # Confusion Matrix
+├── results/               # Confusion Matrix 
 │
 ├── src/
 │   ├── app.py             # 🎯 Real-time app
 │   ├── collect_landmarks.py  # 📊 Feature extraction
 │   ├── train_model.py     # 🧠 Training
-│   └── utils.py
 │
 ├── requirements.txt
 └── README.md
 ```
 
 ---
+
+📊 Nguồn Dữ liệu (Dataset)
+Lưu ý: Bộ dữ liệu gốc (Raw Images) có dung lượng khoảng 3GB nên không được lưu trữ trực tiếp trên Repository này để đảm bảo hiệu suất.
+
+Tải bộ dữ liệu ASL Alphabet Dataset từ Kaggle.
+Link: https://www.kaggle.com/datasets/grassknoted/asl-alphabet
+
+Giải nén và đặt các thư mục chữ cái (A, B, C...) vào đường dẫn: data/.
 
 ## 🚀 Getting Started
 
@@ -165,21 +171,12 @@ python src/app.py
 
 ---
 
-## 🎯 Why This Project Stands Out
-
-✔ Không dùng Deep Learning nhưng vẫn đạt accuracy cao
-✔ Tối ưu CPU → thực tế hơn
-✔ Có UI + UX (progress bar, keyboard)
-
-👉 Thể hiện tư duy **AI Engineer thực chiến**, không chỉ dùng model có sẵn
-
----
 
 ## 🤝 Author
 
 **Nguyen Bao**
 
-* AI / Computer Vision Enthusiast
+* AI / Computer Vision 
 
 ---
 
