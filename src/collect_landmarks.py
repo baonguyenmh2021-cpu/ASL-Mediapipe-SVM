@@ -3,21 +3,18 @@ import mediapipe as mp
 import os
 import pandas as pd
 
-# ==========================================
-# CẤU HÌNH ĐƯỜNG DẪN (CHUẨN GITHUB)
-# ==========================================
-# Trỏ ra ngoài thư mục gốc rồi chui vào data/raw
+
 RAW_DATA_PATH = "../data/asl_alphabet_train/asl_alphabet_train"
-# Nơi lưu file CSV sau khi "ép mỡ"
+
 PROCESSED_DIR = "../data/processed"
 CSV_FILENAME = "asl_data_balanced_final.csv"
 
-TARGET_SAMPLES = 1255  # Ngưỡng cân bằng dữ liệu của Tech Lead
+TARGET_SAMPLES = 1255  
 
-# Tự động tạo thư mục chứa data đã xử lý nếu chưa có
+
 os.makedirs(PROCESSED_DIR, exist_ok=True)
 
-# Khởi tạo MediaPipe
+
 mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_confidence=0.3)
 
@@ -44,7 +41,7 @@ for label in labels:
 
     for img_name in img_list:
         if success_count >= TARGET_SAMPLES: 
-            break  # "Phanh" lại khi đủ ngưỡng
+            break  
 
         # Xử lý đặc biệt cho lớp 'nothing'
         if label == 'nothing':
@@ -79,9 +76,7 @@ for label in labels:
 # Đóng MediaPipe giải phóng RAM
 hands.close()
 
-# ==========================================
-# LƯU DỮ LIỆU SẠCH VÀO FILE CSV
-# ==========================================
+
 print("\n💾 Đang đóng gói dữ liệu vào file CSV...")
 cols = [f'c{i}' for i in range(63)] + ['label']
 df = pd.DataFrame(all_data, columns=cols)
