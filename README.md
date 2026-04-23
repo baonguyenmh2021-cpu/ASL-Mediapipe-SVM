@@ -1,74 +1,62 @@
-🤟 ASL Recognition - MediaPipe & SVM Pipeline
-Dự án Hệ thống Nhận diện Ngôn ngữ Ký hiệu Mỹ (ASL) thời gian thực. > Một sản phẩm nghiên cứu ứng dụng Computer Vision và Machine Learning tối ưu cho thiết bị cấu hình thấp.
+<div align="center">
 
-📑 Tổng quan Dự án (Overview)
-Dự án này giải quyết bài toán nhận diện các chữ cái trong bảng chữ cái ASL thông qua Webcam.
+# 🤟 ASL Recognition System
+### **Real-time Sign Language Translation with MediaPipe & SVM**
 
-Thay vì sử dụng các mô hình Deep Learning (CNN) nặng nề, dự án đi theo hướng Feature Engineering:
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![MediaPipe](https://img.shields.io/badge/MediaPipe-v0.10-teal?style=for-the-badge&logo=google&logoColor=white)](https://mediapipe.dev/)
+[![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-v1.7-orange?style=for-the-badge&logo=scikit-learn&logoColor=white)](https://scikit-learn.org/)
+[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-Sử dụng MediaPipe để trích xuất 21 điểm mốc xương bàn tay (Hand Landmarks).
+*Một giải pháp Computer Vision gọn nhẹ, tối ưu hóa cho hiệu suất cao trên mọi thiết bị.*
 
-Dùng mô hình SVM (Support Vector Machine) để phân loại tọa độ.
+---
+[ 🎬 Xem Demo ] | [ 📊 Kết quả ] | [ 🛠️ Cài đặt ] | [ 🤝 Liên hệ ]
+</div>
 
-Kết quả: Hệ thống cực nhẹ, độ chính xác cao và đạt tốc độ xử lý gần như tức thời trên CPU.
+## 📖 Giới thiệu (Overview)
+Dự án tập trung vào việc thu hẹp khoảng cách giao tiếp bằng cách nhận diện các chữ cái trong Ngôn ngữ Ký hiệu Mỹ (ASL). 
 
-🛠️ Công nghệ Sử dụng (Tech Stack)
-Ngôn ngữ: Python 3.10+
+> **Tại sao lại dùng SVM thay vì Deep Learning?**
+> Thay vì "đốt" tài nguyên vào các mô hình CNN nặng nề, chúng tui sử dụng **Feature Engineering** để trích xuất 21 điểm khớp tay. Điều này giúp hệ thống đạt tốc độ xử lý gần như tức thời (Low Latency) ngay cả trên các thiết bị không có GPU.
 
-Thị giác máy tính: OpenCV, MediaPipe
 
-Học máy (ML): Scikit-learn (SVM), Pandas, Numpy
+## ✨ Tính năng nổi bật
+* **🎯 Độ chính xác cao:** Sử dụng SVM với tối ưu hóa siêu tham số (Grid Search).
+* **⚡ Tốc độ vượt trội:** Trích xuất đặc trưng bằng MediaPipe giúp giảm tải xử lý ảnh thô.
+* **⌨️ Bộ gõ thông minh:** * **Majority Voting:** Lọc nhiễu kết quả từ 10 frame liên tiếp.
+    * **Dwell Time:** Thanh tiến trình (Progress Bar) xác nhận gõ chữ khi giữ tay ổn định.
+    * **Chức năng:** Hỗ trợ phím ảo `Space` và `Delete`.
 
-Đánh giá: Matplotlib, Seaborn
+---
 
-📁 Cấu trúc Thư mục (Directory Structure)
-Plaintext
-asl-recognition/
-├── data/
-│   └── processed/          # File asl_data_balanced_final.csv (Sau khi ép mỡ)
-├── models/                 # Lưu trữ asl_model_final.pkl & asl_scaler.pkl
-├── results/                # Các biểu đồ đánh giá (Confusion Matrix,...)
-├── src/                    # Mã nguồn chính
-│   ├── collect_landmarks.py # Bước 1: Trích xuất tọa độ từ ảnh
-│   ├── train_model.py       # Bước 2: Huấn luyện & Tối ưu mô hình
-│   ├── app.py               # Bước 3: Chạy ứng dụng Real-time
-├── requirements.txt        # Danh sách thư viện cần thiết
-└── README.md               # Tài liệu hướng dẫn dự án
-📊 Nguồn Dữ liệu (Dataset)
-Lưu ý quan trọng: Bộ dữ liệu gốc có dung lượng khoảng 3GB nên đã được cấu hình trong .gitignore để không lưu trữ trực tiếp trên Repository này nhằm đảm bảo hiệu suất tải.
+## 📂 Cấu trúc Thư mục
+| Thư mục | Chức năng |
+| :--- | :--- |
+| `src/` | Chứa toàn bộ mã nguồn xử lý, huấn luyện và ứng dụng. |
+| `data/` | Lưu trữ dữ liệu thô (ảnh) và dữ liệu đã qua xử lý (CSV). |
+| `models/` | Nơi lưu trữ "bộ não" của hệ thống (`.pkl`). |
+| `results/` | Các biểu đồ đánh giá Confusion Matrix và Heatmap. |
 
-Tải về: Bạn có thể tải bộ dữ liệu chính thức tại ASL Alphabet Dataset trên Kaggle.
-Link: https://www.kaggle.com/datasets/grassknoted/asl-alphabet
+---
 
-Cài đặt: Giải nén và đặt các thư mục chữ cái (A, B, C...) vào đường dẫn: data/.
+## 📊 Dữ liệu (Dataset)
+Do dung lượng bộ dữ liệu gốc lên đến **3GB**, chúng tui chỉ lưu trữ các đặc trưng đã trích xuất (`.csv`) trên Repository này.
 
-🚀 Hướng dẫn Cài đặt & Sử dụng
-1. Cài đặt môi trường
-Mở Terminal và chạy lệnh sau để cài đặt chính xác các phiên bản thư viện đã được Tech Lead kiểm nghiệm:
+1.  **Nguồn:** [ASL Alphabet Dataset (Kaggle)](https://www.kaggle.com/datasets/grassknoted/asl-alphabet)
+2.  **Cấu trúc:** Giải nén 29 thư mục chữ cái (A-Z, Del, Nothing, Space) vào `data/raw/`.
 
-Bash
+---
+
+## 🚀 Hướng dẫn Sử dụng (Pipeline)
+
+### 1️⃣ Thiết lập môi trường
+```bash
 pip install -r requirements.txt
-2. Quy trình thực thi (Pipeline)
-Giai đoạn 1: Trích xuất tọa độ (Feature Extraction)
-Quét toàn bộ ảnh trong data/raw/, chuyển đổi thành tọa độ (x, y, z) và lưu vào file CSV.
+2️⃣ Trích xuất & Huấn luyệnĐể xây dựng lại mô hình từ đầu, hãy chạy theo thứ tự:Bash# Bước 1: Quét ảnh và trích xuất tọa độ
+python src/collect_landmarks.py
 
-Bash
-cd src
-python collect_landmarks.py
-Giai đoạn 2: Huấn luyện mô hình (Model Training)
-Đọc dữ liệu từ CSV, thực hiện Grid Search để tìm siêu tham số tốt nhất cho SVM và lưu mô hình.
-
-Bash
-python train_model.py
-Giai đoạn 3: Trải nghiệm ứng dụng (Real-time App)
-Bật Webcam và bắt đầu nhận diện chữ cái kèm theo thanh tiến trình xác nhận (Dwell Time).
-
-Bash
-python app.py
-📈 Kết quả & Đánh giá
-Mô hình được đánh giá qua Confusion Matrix để đảm bảo không bị nhầm lẫn giữa các chữ cái có hình dáng gần giống nhau (như M, N, T). Các báo cáo chi tiết được xuất tự động vào thư mục results/.
-
-🤝 Liên hệ & Đóng góp
-Tác giả: Trần Thị Bảo Nguyên (Tech Lead)
-
-Đơn vị: Trường Đại học Sư phạm - Đại học Đà Nẵng (UED)
+# Bước 2: Huấn luyện mô hình SVM
+python src/train_model.py
+3️⃣ Chạy ứng dụng Real-timeBashpython src/app.py
+📈 Kết quả thực nghiệmMetricGiá trịAccuracy (Test Set)~99%FPS (Webcam)30+Các biểu đồ chi tiết (Confusion Matrix) có thể tìm thấy trong thư mục /results.🤝 Tác giả (Authors)Đơn vị: Trường Đại học Sư phạm - Đại học Đà Nẵng (UED)
