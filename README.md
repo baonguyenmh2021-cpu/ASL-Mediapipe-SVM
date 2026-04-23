@@ -1,6 +1,7 @@
 <div align="center">
 
 # 🤟 ASL Recognition System
+
 ### 🚀 Real-time American Sign Language Translation (CPU-Optimized)
 
 <img src="https://img.shields.io/badge/Python-3.10+-blue?style=for-the-badge&logo=python&logoColor=white"/>
@@ -11,7 +12,7 @@
 
 <br>
 
-🔥 **Fast. Lightweight. Real-time. No GPU required.**
+🔥 **Fast – Lightweight – Real-time – No GPU Required**
 
 </div>
 
@@ -19,27 +20,29 @@
 
 ## 🧠 Problem
 
-Nhận diện ngôn ngữ ký hiệu thường phụ thuộc vào Deep Learning (CNN, LSTM) →  
-❌ Nặng  
-❌ Chậm  
-❌ Cần GPU  
+Hầu hết các hệ thống nhận diện ngôn ngữ ký hiệu sử dụng Deep Learning:
 
-👉 Không phù hợp cho **real-time trên máy yếu**.
+* ❌ Model nặng (CNN, LSTM)
+* ❌ Cần GPU
+* ❌ Latency cao
+
+👉 Không phù hợp cho ứng dụng **real-time trên máy yếu**
 
 ---
 
 ## 💡 Solution
 
-Xây dựng hệ thống nhận diện ASL dựa trên:
+Dự án sử dụng hướng tiếp cận tối ưu hơn:
 
-- **Feature Engineering** thay vì Deep Learning
-- **MediaPipe** → trích xuất 21 keypoints bàn tay
-- **SVM (Support Vector Machine)** → phân loại nhanh, nhẹ
+* 📌 **MediaPipe** → Trích xuất 21 landmarks bàn tay
+* 📌 **Feature Engineering** → Chuẩn hóa dữ liệu
+* 📌 **SVM** → Phân loại nhanh và nhẹ
 
-👉 Kết quả:  
-⚡ **Real-time 30+ FPS trên CPU**  
-⚡ **Độ chính xác ~99%**  
-⚡ **Model chỉ ~2MB**
+👉 Kết quả:
+
+* ⚡ 30+ FPS trên CPU
+* ⚡ Accuracy ~99%
+* ⚡ Model ~2MB
 
 ---
 
@@ -47,25 +50,43 @@ Xây dựng hệ thống nhận diện ASL dựa trên:
 
 ```mermaid
 graph LR
+
 A[Input Image] --> B[MediaPipe Hand Detection]
 B --> C[Extract 21 Landmarks]
 C --> D[Normalize Coordinates]
-D --> E[SVM Model]
+D --> E[SVM Classifier]
 E --> F[Predicted Character]
-✨ Key Features
-⚡ High Performance
-30+ FPS trên CPU (không cần GPU)
-Latency < 10ms
-🛡️ Noise Reduction
-Majority Voting (10 frames)
-Giảm rung & sai lệch prediction
-⏳ Smart Input (Dwell Time)
-Giữ tay → xác nhận ký tự
-Tránh nhập nhầm
-⌨️ Virtual Keyboard
-Space → khoảng trắng
-Delete → xóa ký tự
-📂 Project Structure
+```
+
+---
+
+## ✨ Key Features
+
+### ⚡ High Performance
+
+* 30+ FPS trên CPU (không cần GPU)
+* Latency < 10ms
+
+### 🛡️ Noise Reduction
+
+* Majority Voting (10 frames)
+* Giảm rung và sai prediction
+
+### ⏳ Smart Input (Dwell Time)
+
+* Giữ tay để xác nhận ký tự
+* Tránh nhập nhầm
+
+### ⌨️ Virtual Keyboard
+
+* `Space` → khoảng trắng
+* `Delete` → xóa
+
+---
+
+## 📂 Project Structure
+
+```bash
 asl-recognition/
 │
 ├── data/
@@ -73,60 +94,106 @@ asl-recognition/
 │   └── processed/         # CSV landmarks
 │
 ├── models/                # SVM model + scaler
-├── results/               # Confusion Matrix, Heatmap
+├── results/               # Confusion Matrix
 │
 ├── src/
 │   ├── app.py             # 🎯 Real-time app
 │   ├── collect_landmarks.py  # 📊 Feature extraction
-│   ├── train_model.py     # 🧠 Training + GridSearch
+│   ├── train_model.py     # 🧠 Training
 │   └── utils.py
 │
 ├── requirements.txt
 └── README.md
-🚀 Getting Started
-1. Install dependencies
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Install dependencies
+
+```bash
 pip install -r requirements.txt
-2. Extract Features
+```
+
+### 2. Extract features
+
+```bash
 python src/collect_landmarks.py
-3. Train Model
+```
+
+### 3. Train model
+
+```bash
 python src/train_model.py
-4. Run Real-time App
+```
+
+### 4. Run real-time app
+
+```bash
 python src/app.py
-📊 Results
-Metric	Value
-Accuracy	> 99%
-Latency	< 10ms
-FPS	30+
-Model Size	~2.1 MB
-📸 Demo (Recommended thêm video/GIF ở đây)
+```
 
-👉 Bạn nên thêm:
+---
 
-GIF demo webcam
-hoặc video YouTube
-🧩 Tech Stack
-Python
-MediaPipe (Hand Tracking)
-Scikit-learn (SVM)
-OpenCV (Real-time Processing)
-🎯 Why This Project Stands Out
+## 📊 Results
+
+| Metric     | Value  |
+| ---------- | ------ |
+| Accuracy   | > 99%  |
+| Latency    | < 10ms |
+| FPS        | 30+    |
+| Model Size | ~2.1MB |
+
+---
+
+## 📸 Demo
+
+👉 Nên thêm:
+
+* GIF webcam demo
+* Hoặc video YouTube
+
+---
+
+## 🧩 Tech Stack
+
+* Python
+* MediaPipe
+* Scikit-learn (SVM)
+* OpenCV
+
+---
+
+## 🎯 Why This Project Stands Out
 
 ✔ Không dùng Deep Learning nhưng vẫn đạt accuracy cao
-✔ Tối ưu cho CPU → thực tế hơn
-✔ Có UX (progress bar, keyboard) → không chỉ model
+✔ Tối ưu CPU → thực tế hơn
+✔ Có UI + UX (progress bar, keyboard)
 
-👉 Đây là điểm mà nhà tuyển dụng rất thích:
+👉 Thể hiện tư duy **AI Engineer thực chiến**, không chỉ dùng model có sẵn
 
-“Bạn hiểu bài toán, không chỉ biết dùng CNN”
+---
 
-🤝 Author
+## 🤝 Author
 
-Nguyen Bao
+**Nguyen Bao**
 
-💻 AI / Computer Vision Enthusiast
-🎯 Focus: Real-time Systems & Optimization
-⭐ Future Improvements
-Thêm word prediction (NLP)
-Hỗ trợ câu thay vì ký tự
-Deploy Web (Streamlit / Flask)
-Mobile version
+* AI / Computer Vision Enthusiast
+
+---
+
+## ⭐ Future Improvements
+
+* Word prediction (NLP)
+* Nhận diện câu thay vì ký tự
+* Deploy Web (Streamlit / Flask)
+* Mobile version
+
+---
+
+<div align="center">
+
+🔥 Nếu thấy project hữu ích → hãy ⭐ repo nhé!
+
+</div>
