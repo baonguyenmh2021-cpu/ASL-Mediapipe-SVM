@@ -17,9 +17,6 @@ RESULTS_DIR = "../results"
 os.makedirs(MODEL_DIR, exist_ok=True)
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
-# ==========================================
-# GIAI ĐOẠN 1: ĐỌC VÀ CHUẨN BỊ DỮ LIỆU
-# ==========================================
 print("⏳ Đang tải dữ liệu...")
 try:
     df = pd.read_csv(DATA_PATH)
