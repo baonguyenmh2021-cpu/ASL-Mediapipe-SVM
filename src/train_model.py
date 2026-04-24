@@ -9,10 +9,6 @@ from sklearn.svm import SVC
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix
 
-# ==========================================
-# CẤU HÌNH ĐƯỜNG DẪN (CHUẨN GITHUB)
-# ==========================================
-# Trỏ vào file CSV đã trích xuất từ bước trước
 DATA_PATH = "../data/asl_data_balanced_final.csv" 
 MODEL_DIR = "../models"
 RESULTS_DIR = "../results"
@@ -43,9 +39,6 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# ==========================================
-# GIAI ĐOẠN 2: HUẤN LUYỆN & TỐI ƯU HÓA SVM
-# ==========================================
 print("\n🚀 Đang huấn luyện Baseline Model...")
 model = SVC()
 model.fit(X_train_scaled, y_train)
@@ -60,9 +53,6 @@ grid = GridSearchCV(SVC(probability=True), param_grid, cv=3, verbose=2, n_jobs=-
 print("\n🧠 Đang huấn luyện & tối ưu hóa siêu tham số (GridSearch)...")
 grid.fit(X_train_scaled, y_train)
 
-# ==========================================
-# GIAI ĐOẠN 3: VẼ BIỂU ĐỒ HEATMAP TỐI ƯU
-# ==========================================
 print("\n📈 Đang lưu biểu đồ Heatmap Grid Search...")
 results = pd.DataFrame(grid.cv_results_)
 results['param_C'] = results['param_C'].astype(float)
@@ -83,9 +73,6 @@ plt.tight_layout()
 plt.savefig(f"{RESULTS_DIR}/grid_search_heatmap.png", dpi=300)
 plt.close() 
 
-# ==========================================
-# GIAI ĐOẠN 4: LƯU MODEL & ĐÁNH GIÁ CUỐI CÙNG
-# ==========================================
 best_model = grid.best_estimator_
 
 print(f"\n💾 Đang lưu mô hình và bộ chuẩn hóa vào '{MODEL_DIR}/'...")
